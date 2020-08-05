@@ -1,0 +1,13 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+.mat-card {
+  width: 80%;
+  margin: auto;
+}
+/* @media screen and (max-width: 720px) {
+  .mat-card {
+    width: 100%;
+  }
+} */

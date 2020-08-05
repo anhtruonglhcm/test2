@@ -1,0 +1,16 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-card{
+    width:80%;
+    margin:auto;
+}
+.formControl{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.btncancel{
+    margin-left: 10px;
+}

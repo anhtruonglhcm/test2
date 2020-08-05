@@ -1,0 +1,19 @@
+.btncreate{
+    position:absolute;
+    right:20px;
+}
+.loadingne{
+    width: 200px;
+    margin:auto;
+}
+.mat-header-cell{
+    justify-content: center;
+}
+.mat-cell{
+    justify-content: center;
+}
+.loadingne{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}

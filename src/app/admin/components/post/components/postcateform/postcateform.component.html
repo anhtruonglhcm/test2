@@ -1,0 +1,27 @@
+<form (ngSubmit)="onsubmit()" [formGroup]="formPostCate" class="formContainer">
+    {{formPostCate.value | json}}
+    <mat-form-field color="accent">
+        <input type="text" placeholder="Category Name" formControlName="name" matInput>
+    </mat-form-field>
+    <div class="form-control" *ngIf="imgUrl && imgUrl != ''">
+        <img [src]="imgUrl" height="100px">
+    </div>
+    <div class="form-control">
+        <button mat-stroked-button (click)="selectimg.click()" type="button">Select Photo</button>
+    </div>
+    <input type="file" hidden accept="image/*" #selectimg (change)="selectImage($event)">
+    <div class="form-control">
+        <mat-slide-toggle color="accent" formControlName="status">
+            Category Status
+        </mat-slide-toggle>
+    </div>
+    <mat-form-field color="accent">
+        <input type="number" matInput value="0" formControlName="position" placeholder="Position">
+    </mat-form-field>
+    <mat-form-field color="accent">
+        <input type="text" matInput placeholder="Description" formControlName="description">
+    </mat-form-field>
+    <div class="form-control">
+        <button mat-raised-button color="accent">Create</button>
+    </div>
+</form>

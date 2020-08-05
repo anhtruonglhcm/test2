@@ -1,0 +1,32 @@
+<mat-card>
+    <h2>{{title}}</h2>
+    {{productForm.value | json}}
+    <form (ngSubmit)="onSubmit()" [formGroup]="productForm" class="form-container">
+        <mat-form-field color="accent" class="formControl">
+            <input type="text" matInput formControlName="name" name="name" placeholder="Category Name">
+        </mat-form-field>
+        <div class="formControl" *ngIf="imgUrl && imgUrl !== ''">
+            <img [src]="imgUrl" height="100px">
+        </div>
+        <div class="formControl">
+            <button mat-stroked-button type="button" (click)="pickerfile.click()">Category
+                Photo</button>
+            <input type="file" (change)="uploadFile($event)" hidden #pickerfile accept="image/*">
+        </div>
+        <div class="formControl">
+            <mat-slide-toggle formControlName="status">Category Status</mat-slide-toggle>
+        </div>
+        <mat-form-field color="accent" class="formControl">
+            <input type="text" matInput placeholder="Category Description" formControlName="description">
+        </mat-form-field>
+        <mat-form-field color="accent" class="formControl">
+            <input type="number" matInput placeholder="Category Position" formControlName="position" value="0">
+        </mat-form-field>
+        <div>
+            <button type="submit" mat-raised-button color="accent"
+                [disabled]="productForm.invalid">{{titlebtn}}</button>
+            <button type="button" mat-raised-button class="btncancel"
+                [routerLink]="['/admin/product-cate']">Cancel</button>
+        </div>
+    </form>
+</mat-card>

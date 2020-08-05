@@ -1,0 +1,33 @@
+<mat-card>
+  <h3>{{title}}</h3>
+  <form class="form-container" (ngSubmit)="onSubmit()" [formGroup]="invoiceForm">
+    <mat-form-field color="accent">
+      <input matInput type="text" placeholder="Item" formControlName="item">
+      <mat-error *ngIf="invoiceForm.controls.item.invalid && invoiceForm.controls.item.touched">Please fill email
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent">
+      <input matInput type="text" placeholder="price" formControlName="price">
+      <mat-error *ngIf="invoiceForm.controls.price.invalid && invoiceForm.controls.price.touched">Please fill price
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent">
+      <input matInput type="text" placeholder="qty" formControlName="qty">
+    </mat-form-field>
+    <mat-form-field color="accent">
+      <input matInput placeholder="date" formControlName="date" [matDatepicker]="picker">
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select Client" formControlName="client">
+        <mat-option *ngFor="let c of clients" [value]="c._id">
+          {{c.firstName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="accent" [disabled]="invoiceForm.invalid">Create</button>
+    </div>
+  </form>
+</mat-card>

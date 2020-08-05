@@ -1,0 +1,58 @@
+<mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
+<mat-card>
+    <h3 style="font-weight: bold;">{{title}}</h3>
+    {{productForm.value | json}}
+    <form (ngSubmit)="onSubmit()" [formGroup]="productForm" class="formContainer" enctype="multipart/form-data">
+        <mat-form-field color="accent" class="form-control">
+            <input matInput placeholder="Product Name" formControlName="name">
+            <mat-error *ngIf="productForm.controls.name.invalid && productForm.controls.name.touched">
+                Please fill
+                Product Name</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent" class="form-control">
+            <input matInput placeholder="Product Price" formControlName="price">
+            <mat-error *ngIf="productForm.controls.price.invalid && productForm.controls.price.touched">
+                Please fill
+                Product Price</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent" class="form-control">
+            <mat-select placeholder="Product Category" formControlName="productCate" [(value)]="productCateSelected">
+                <mat-option *ngFor="let proCate of productCate" value="{{proCate._id}}">{{proCate.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="productForm.controls.productCate.invalid && productForm.controls.productCate.touched">
+                Please choose Product Category</mat-error>
+        </mat-form-field>
+        <div class="form-control">
+            <ng-container *ngIf="imgURL && imgURL != ''">
+                <img src="{{imgURL}}" height="100px">
+            </ng-container>
+        </div>
+        <div class="form-control">
+            <button mat-stroked-button type="button" (click)="filePicker.click()">Product Photo</button>
+            <input type="file" hidden #filePicker accept="image/*" (change)="uploadFile($event)">
+        </div>
+        <div class="form-control">
+            <mat-slide-toggle formControlName="status">
+                Product Status
+            </mat-slide-toggle>
+        </div>
+        <div class="form-control">
+            <mat-slide-toggle formControlName="is_home">
+                Product Home
+            </mat-slide-toggle>
+        </div>
+        <mat-form-field class="form-control" color="accent">
+            <input type="number" formControlName="position" placeholder="Product Position" matInput>
+        </mat-form-field>
+        <div class="form-control">
+            <ckeditor [editor]="Editor" (ready)="onReady($event)" #ckeditor formControlName="introduction"
+                class="ckeditor"></ckeditor>
+        </div>
+        <div class="form-control">
+            <ckeditor [editor]="Editor" (ready)="onReady($event)" #ckeditor formControlName="description"></ckeditor>
+        </div>
+        <div class="btnsubmit">
+            <button type="submit" mat-raised-button color="accent">{{titletbn}}</button>
+        </div>
+    </form>
+</mat-card>

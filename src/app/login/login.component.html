@@ -1,0 +1,17 @@
+<div class="khoilogin">
+  <mat-card>
+    <h2>Login</h2>
+    <form class="form-login" (ngSubmit)="onSubmit()" [formGroup]="formLogin">
+      <mat-form-field color="accent">
+        <input type="text" matInput placeholder="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <input type="password" matInput placeholder="password" formControlName="password">
+      </mat-form-field>
+      <div class="btnsubmit">
+        <button mat-raised-button color="accent">Login</button>
+      </div>
+      <mat-error *ngIf="">{{error}}</mat-error>
+    </form>
+  </mat-card>
+</div>

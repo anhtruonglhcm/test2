@@ -1,0 +1,68 @@
+<div class="spinnercontainer" *ngIf="isLoading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+<div class="tablecontainer mat-elevation-z10">
+  <div *ngIf="!isLoading">
+    <mat-toolbar>
+      <mat-form-field color="accent">
+        <input type="text" matInput placeholder="Filter" (keyup)="filterChange($event.target.value)">
+      </mat-form-field>
+      <button mat-raised-button color="accent" class="forminvoice" (click)="createInvoice()">New Invoices</button>
+    </mat-toolbar>
+    <mat-table [dataSource]="dataSource2" matSort (matSortChange)="sortData($event)">
+      <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef> No.
+        </mat-header-cell>
+        <mat-cell *matCellDef="let index=index"> {{index+1}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="item">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> item
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.item}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> price
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.price | currency :'USD'}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="qty">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> qty
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date | date :'d/M/yyyy'}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> action
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-button [matMenuTriggerFor]="menuRef">
+            <mat-icon>
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-menu #menuRef="matMenu">
+            <button mat-menu-item (click)="updateInvoice(element._id)">
+              <mat-icon>editor</mat-icon>
+              Editor
+            </button>
+            <button mat-menu-item (click)="deleteInvoice(element._id)">
+              <mat-icon>
+                delete
+              </mat-icon>
+              Delete
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <mat-paginator #paginator [length]="resultLength" [pageSize]="10" [pageSizeOptions]="[5,10,20,100]" [pageIndex]="0"
+    [showFirstLastButtons]="true" (page)="onPageChanged($event)">
+  </mat-paginator>
+</div>

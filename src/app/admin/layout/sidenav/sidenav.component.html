@@ -1,0 +1,35 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [mode]="isSmallScreen() ? 'over' : 'side'" [opened]="!isSmallScreen()">
+    <mat-toolbar color="accent">
+      <button mat-button [routerLink]="['/admin']">Dashboard</button>
+    </mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-raised-button [routerLink]="['/admin/invoice']" color="accent">Invoice</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-raised-button [routerLink]="['/admin/client']" color="accent">Client</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-raised-button [matMenuTriggerFor]="menu" color="accent">Product Manage</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['/admin/product-cate']">Product Category</button>
+          <button mat-menu-item [routerLink]="['/admin/product']">Products</button>
+        </mat-menu>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-raised-button [matMenuTriggerFor]="menu2" color="accent">Post Manager</button>
+        <mat-menu #menu2="matMenu">
+          <button mat-menu-item [routerLink]="['/admin/post/post-cate']">Post Category</button>
+          <button mat-menu-item [routerLink]="['/admin/post/post-list']">Posts</button>
+        </mat-menu>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-toolbar (sideNavToggle)="sidenav.toggle()"></app-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
